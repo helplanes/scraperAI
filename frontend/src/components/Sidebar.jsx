@@ -95,7 +95,11 @@ function Sidebar({
       </div>
 
       <div className="sidebar-footer">
-        <p>Powered by Ollama + Web Scraping</p>
+        <p>
+          <a href="https://github.com/helplanes/scraperAI/">
+            Created by @helplanes || Support and Contribute
+          </a>
+        </p>
       </div>
     </div>
   );

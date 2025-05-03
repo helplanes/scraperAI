@@ -1,134 +1,185 @@
-# AI Web Scraper
+# ScraperAI
 
-A web application that combines web scraping with local AI models (via Ollama) to analyze web content and answer questions about it.
+A UI interface that combines **web scraping** with **local AI models** (via [Ollama](https://ollama.ai)) to analyze web content and answer questions about it.
 
-## Features
+---
 
-- 🌐 Web Scraping: Enter any URL to scrape website content
-- 🤖 AI Integration: Process scraped content with local LLMs through Ollama
-- 💬 Chat Interface: Ask follow-up questions about scraped content
-- 📋 Model Selection: Choose from available Ollama models
-- 💾 Local Storage: Conversations are stored in your browser
+## 🚀 Features
 
-## Prerequisites
+- 🌐 **Web Scraping**: Enter any URL to scrape website content.
+- 🤖 **AI Integration**: Process scraped content with local LLMs through Ollama.
+- 💬 **Chat Interface**: Ask follow-up questions about scraped content in a conversational format.
+- 📋 **Model Selection**: Choose from available Ollama models to customize the AI's behavior.
+- 💾 **Local Storage**: Conversations are stored in your browser for easy access.
+
+---
+
+## 🛠️ Prerequisites
+
+Before setting up the project, ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/) (v14+)
 - [Python](https://www.python.org/) (v3.9+)
 - [Ollama](https://ollama.ai/) installed and running locally
-    - Install as many models as you want
+  - Install as many models as you want using `ollama pull <model-name>`.
 
-## Project Structure
+---
 
-```
-ai-web-scraper/
-├── frontend/            # React frontend
-│   ├── src/
-│   │   ├── components/  # React components
-│   │   ├── services/    # API services
-│   │   └── ...
-│   └── ...
-└── backend/             # FastAPI backend
-    ├── server.py        # Main server file
-    └── requirements.txt # Python dependencies
-```
-
-## Setup and Installation
+## 📦 Setup and Installation
 
 ### Step 1: Install Ollama
 
-First, install Ollama on your machine by following the instructions at [ollama.ai](https://ollama.ai/).
+1. Install Ollama on your machine by following the instructions at [ollama.ai](https://ollama.ai/).
+2. Pull at least one model to use with the application:
 
-Then, pull at least one model to use with the application:
+   ```bash
+   ollama pull mistral
+   # or any other model you prefer
+   ```
 
-```bash
-ollama pull mistral
-# or any other model you prefer
-```
+3. Start the Ollama server:
 
-Make sure Ollama is running in the background:
+   ```bash
+   ollama serve
+   ```
 
-```bash
-ollama serve
-```
+---
 
-### Step 2: Set up the Backend
+### Step 2: Set Up the Backend
 
-```bash
-# Navigate to the backend directory
-cd backend
+1. Navigate to the backend directory:
 
-# Create and activate a virtual environment (optional but recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```bash
+   cd backend
+   ```
 
-# Install dependencies
-pip install -r requirements.txt
+2. Create and activate a virtual environment (optional but recommended):
 
-# Start the server
-python server.py
-```
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-The backend server will run at http://localhost:8000.
+3. Install dependencies:
 
-### Step 3: Set up the Frontend
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-# Navigate to the frontend directory
-cd frontend
+4. Start the backend server:
 
-# Install dependencies
-npm install
+   ```bash
+   python server.py
+   ```
 
-# Start the development server
-npm start
-```
+   The backend server will run at [http://localhost:8000](http://localhost:8000).
 
-The frontend will be available at http://localhost:3000.
+---
 
-## Usage
+### Step 3: Set Up the Frontend
 
-1. Open the application in your browser at http://localhost:3000
-2. Select an Ollama model from the dropdown in the sidebar
-3. Enter a URL in the input box and click "Scrape"
-4. Wait for the scraping process to complete
-5. Ask questions about the scraped content
+1. Navigate to the frontend directory:
 
-## API Endpoints
+   ```bash
+   cd frontend
+   ```
 
-- `GET /api/models` - Get a list of available Ollama models
-- `POST /api/scrape` - Scrape content from a website
-- `POST /api/ollama` - Send content to Ollama for processing
+2. Install dependencies:
 
-## Development
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm start
+   ```
+
+   The frontend will be available at [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 🖥️ Usage
+
+1. Open the application in your browser at [http://localhost:3000](http://localhost:3000).
+2. Select an Ollama model from the dropdown in the sidebar.
+3. Enter a URL in the input box and click **Scrape**.
+4. Wait for the scraping process to complete.
+5. Ask questions about the scraped content in the chat interface.
+
+---
+
+## 📡 API Endpoints
+
+### Backend Endpoints
+
+- **`GET /api/models`**  
+  Fetch a list of available Ollama models.
+
+- **`POST /api/scrape`**  
+  Scrape content from a website.  
+  **Request Body**:
+
+  ```json
+  {
+    "url": "https://example.com"
+  }
+  ```
+
+- **`POST /api/ollama`**  
+  Send content to Ollama for processing.  
+  **Request Body**:
+  ```json
+  {
+    "model": "mistral",
+    "content": "Scraped content here...",
+    "prompt": "Summarize this content."
+  }
+  ```
+
+---
+
+## 🛠️ Stack
 
 ### Frontend
 
-The frontend is built with React and uses:
+The frontend is built with **React** and uses:
 
-- CSS for styling
-- Local storage for persisting conversations
+- **CSS** for styling.
+- **Local Storage** for persisting conversations.
 
 ### Backend
 
-The backend is built with FastAPI and uses:
+The backend is built with **FastAPI** and uses:
 
-- BeautifulSoup for web scraping
-- HTTP requests to communicate with Ollama
+- **BeautifulSoup** for web scraping.
+- **Playwright** for rendering JavaScript-heavy websites.
+- **HTTPX** for making HTTP requests.
 
-## Limitations
+## ⚠️ Limitations
 
-- Ollama must be running locally for the application to work
-- Some websites may block web scraping attempts
-- Complex web pages (SPAs, JavaScript-heavy sites) may not scrape properly
-- Large web pages will be truncated to avoid overwhelming the LLM
+    - Ollama must be running locally for the application to work.
+    - Some websites may block web scraping attempts.
+    - Complex web pages (SPAs, JavaScript-heavy sites) may not scrape properly.
+    - Large web pages will be truncated to avoid overwhelming the LLM.
 
-## Future Improvements
+---
 
-- Add authentication
-- Improve scraping capabilities for JavaScript-heavy sites
-- Add document upload support for PDFs, DOCs, etc.
-- Implement vector search for better content retrieval
+## 🌟 Future Improvements
 
-## License
+- Enhance scraping capabilities for JavaScript-heavy websites. **[High Priority]**
+- Support document uploads (e.g., PDFs, DOCs).
+- Implement vector search for better content retrieval.
+- Add multi-language support for broader usability.
 
-MIT License
+## 🧑‍💻 Contributing
+
+Contributions are welcome and would be greatly appreciated!
+<br/>If you'd like to contribute, please fork the repository and submit a pull request.
+
+## 📞 Support
+
+If you encounter any issues or have questions, feel free to open an issue in the repository or contact the project maintainers.
+
+---
