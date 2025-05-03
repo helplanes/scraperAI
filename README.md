@@ -2,6 +2,10 @@
 
 A UI interface that combines **web scraping** with **local AI models** (via [Ollama](https://ollama.ai)) to analyze web content and answer questions about it.
 
+![image](https://github.com/user-attachments/assets/3c5cf0d0-ba07-428a-afe5-8658562a2ab1)
+
+
+
 ---
 
 ## 🚀 Features
