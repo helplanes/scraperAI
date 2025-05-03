@@ -4,8 +4,6 @@ A UI interface that combines **web scraping** with **local AI models** (via [Oll
 
 ![image](https://github.com/user-attachments/assets/3c5cf0d0-ba07-428a-afe5-8658562a2ab1)
 
-
-
 ---
 
 ## 🚀 Features
@@ -73,7 +71,7 @@ Before setting up the project, ensure you have the following installed:
 4. Start the backend server:
 
    ```bash
-   python server.py
+   uvicorn server:app --reload
    ```
 
    The backend server will run at [http://localhost:8000](http://localhost:8000).
