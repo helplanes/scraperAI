@@ -12,18 +12,15 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [scrapeStatus, setScrapeStatus] = useState("");
 
-  // Load conversations from localStorage on component mount
   useEffect(() => {
     const storedConversations = localStorage.getItem("conversations");
     if (storedConversations) {
       setConversations(JSON.parse(storedConversations));
     }
 
-    // Fetch available Ollama models
     fetchOllamaModels();
   }, []);
 
-  // Save conversations to localStorage whenever they change
   useEffect(() => {
     if (conversations.length > 0) {
       localStorage.setItem("conversations", JSON.stringify(conversations));

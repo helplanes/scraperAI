@@ -13,14 +13,12 @@ function ChatInterface({
   const inputRef = useRef(null);
 
   useEffect(() => {
-    // Focus input on component mount
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
 
   useEffect(() => {
-    // Scroll to bottom whenever messages change
     scrollToBottom();
   }, [conversation?.messages]);
 
@@ -41,7 +39,6 @@ function ChatInterface({
     const value = e.target.value;
     setInputValue(value);
 
-    // Check if input is a URL
     try {
       new URL(value);
       setIsUrl(true);
@@ -58,9 +55,7 @@ function ChatInterface({
     });
   };
 
-  // Function to render message content with line breaks and links
   const renderMessageContent = (content) => {
-    // Split content by newlines and map each line
     return content.split("\n").map((line, i) => (
       <React.Fragment key={i}>
         {line}
@@ -80,18 +75,6 @@ function ChatInterface({
               chat with your selected Ollama model about previously scraped
               content.
             </p>
-            <div className="instructions">
-              <h3>How to use:</h3>
-              <ol>
-                <li>Select an Ollama model from the dropdown on the left</li>
-                <li>Enter a URL to scrape in the input box below</li>
-                <li>Wait for the scraping to complete</li>
-                <li>Ask questions about the scraped content</li>
-              </ol>
-              <p className="note">
-                Note: All conversations are stored locally in your browser.
-              </p>
-            </div>
           </div>
         ) : (
           <>
@@ -112,21 +95,6 @@ function ChatInterface({
                 </div>
                 <div className="message-content">
                   {renderMessageContent(message.content)}
-
-                  {message.metadata?.url && (
-                    <div className="metadata">
-                      <p className="source-url">
-                        Source:{" "}
-                        <a
-                          href={message.metadata.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {message.metadata.url}
-                        </a>
-                      </p>
-                    </div>
-                  )}
                 </div>
               </div>
             ))}
@@ -136,6 +104,16 @@ function ChatInterface({
               <div className="scrape-status">
                 <div className="loading-spinner"></div>
                 <p>{scrapeStatus}</p>
+              </div>
+            )}
+
+            {/* Loading indicator for AI response */}
+            {isLoading && (
+              <div className="loading-indicator">
+                <div className="spinner"></div>
+                <p>
+                  Preparing answers<span className="dots">...</span>
+                </p>
               </div>
             )}
 
