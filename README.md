@@ -15,6 +15,7 @@ A web application that combines web scraping with local AI models (via Ollama) t
 - [Node.js](https://nodejs.org/) (v14+)
 - [Python](https://www.python.org/) (v3.9+)
 - [Ollama](https://ollama.ai/) installed and running locally
+    - Install as many models as you want
 
 ## Project Structure
 
